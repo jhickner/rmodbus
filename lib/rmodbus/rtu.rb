@@ -32,6 +32,8 @@ module ModBus
           # we need to read + CRC
           msg += io.read(1)
           msg += io.read(msg.getbyte(2)+2)
+        when 8 then
+          msg += io.read(6)
         when 5,6,15,16 then
           # We just read in an additional 6 bytes
           msg += io.read(6)
