@@ -194,6 +194,16 @@ module ModBus
     end
     alias_method :write_holding_register, :write_single_register
 
+    # Write a single diagnostic register
+    #
+    # @example
+    #  write_diagnostic(1, "\xff\x00") => [255, 0]
+    # @param [Integer] subfunc diagnostic subfunction
+    # @param [Integer] data subfunction data
+    # @return [Array] echoes back the passed in data
+    def write_diagnostic(subfunc, data)
+      query("\x8" + subfunc.to_word + data)
+    end
 
     # Write multiple holding registers
     #
